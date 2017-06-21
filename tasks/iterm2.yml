@@ -1,0 +1,42 @@
+---
+- name: Install Iterm2 App
+  homebrew_cask:
+    name: iterm2
+    state: present
+  tags: [iterm, install]
+
+- name: Enable automatic updates
+  osx_defaults: domain=com.googlecode.iterm2 key=SUEnableAutomaticChecks type=bool value=true
+  tags: [iterm, config]
+
+- name: Check if prefs folder exists
+  file:
+    path: "{{ iterm_prefs_folder }}"
+    state: directory
+    mode: 0755
+  when: iterm_prefs_folder is defined
+  tags: [iterm, config]
+
+- name: Set iterm2 custom prefs folder
+  osx_defaults: domain=com.googlecode.iterm2 key=PrefsCustomFolder type=string value="{{ iterm_prefs_folder }}"
+  when: iterm_prefs_folder is defined
+  tags: [iterm, config]
+
+- name: Install Solorized theme
+  shell: open files/iterm2/SolarizedDark-Patched.itermcolors
+
+- name: Install Nerd Meslo font for powerline
+  homebrew_cask:
+    name: font-hack-nerd-font
+    state: present
+
+- name: Enable custom prefs folder
+  osx_defaults: domain=com.googlecode.iterm2 key=LoadPrefsFromCustomFolder type=bool value=true
+  when: iterm_prefs_folder is defined
+  tags: [iterm, config]
+
+- name: Disable custom prefs folder
+  osx_defaults: domain=com.googlecode.iterm2 key=LoadPrefsFromCustomFolder type=bool value=true
+  when: iterm_prefs_folder is not defined
+  tags: [iterm, config]
+
