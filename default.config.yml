@@ -6,72 +6,70 @@ configure_sudoers: yes
 configure_terminal: yes
 configure_osx: yes
 
-dotfiles_repo: https://github.com/geerlingguy/dotfiles.git
+dotfiles_repo: https://github.com/amanbolat/dotfiles-2
 dotfiles_repo_accept_hostkey: yes
-dotfiles_repo_local_destination: ~/Dropbox/Development/GitHub/dotfiles
+dotfiles_repo_local_destination: ~/.dotfiles
 dotfiles_files:
   - .bash_profile
   - .gitignore
+  - .gotconfig
   - .inputrc
   - .osx
   - .vimrc
+  - .zshrc
 
 homebrew_installed_packages:
-  # - ansible # Installed via Pip.
-  - autoconf
-  - bash-completion
-  - chromedriver
-  - doxygen
-  - gettext
-  - gifsicle
+  - aria2
   - git
   - go
   - gpg
-  - hub
+  - tldr
+  - hg
+  - htop
   - httpie
-  - iperf
-  - libevent
+#  - iperf
   - sqlite
   - mcrypt
   - nmap
   - node
   - nvm
   - ssh-copy-id
-  - cowsay
+  - stormssh
   - readline
   - openssl
   - pv
   - wget
   - wrk
+  - zsh
+  - zsh-syntax-highlighting
 
 homebrew_taps:
   - homebrew/core
   - caskroom/cask
-  - homebrew/php
+  - caskroom/drivers
+  - caskroom/fonts
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
+  - iterm2
   - docker
-  - dropbox
-  # - fing # Download link keeps getting changed, d'oh!
-  - firefox
+  - resilio-sync
+  - skype
   - google-chrome
-  - handbrake
-  - licecap
-  - limechat
   - macvim
-  - nvalt
-  - sequel-pro
-  - skitch
   - slack
-  - sublime-text
-  - transmit
   - vagrant
   - virtualbox
+  - logitech-options
 
 # See `geerlingguy.mas` role documentation for usage instructions.
-mas_installed_apps: []
-mas_email: ""
+mas_installed_apps:
+  - { id: 443987910, name: "1Password (6.7)" }
+  - { id: 1091189122, name: "Bear (1.2.1)" }
+  - { id: 540348655, name: "Monosnap" }
+  - { id: 451108668, name: "QQ" }
+
+mas_email: "amanbolat@me.com"
 mas_password: ""
 
 osx_script: "~/.osx --no-restart"
@@ -98,3 +96,17 @@ pip_packages: []
 
 # Glob pattern to ansible task files to run after all other tasks are finished.
 post_provision_tasks: []
+
+# Install iterm2 and themes
+iterm_config_path: ~/dotfiles/iterm
+
+#Viasite ansible configs
+zsh_user: "{{ ansible_user_id }}"
+
+# List of directories to create
+dir_list:
+  - ~/Code
+
+# iterm2
+iterm_prefs_folder: ~/.iterm
+
