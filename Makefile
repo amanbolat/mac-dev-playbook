@@ -4,3 +4,5 @@ run:
 
 prepare:
 	ansible-galaxy install -r requirements.yml
+install_ansible:
+	./install_ansible.sh
